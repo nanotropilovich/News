@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "E6786B65-B81C-4CE0-BE8E-815970167968"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0C2DB8E8-739B-4E55-878E-DA230E26E2A5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tinkoffNews/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "fetchData(from:with:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0C2DB8E8-739B-4E55-878E-DA230E26E2A5 - 8e296b77bc27171e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tinkoffNews.NetworkManager.fetchData(from: Swift.String, with: (tinkoffNews.News) -&gt; ()) -&gt; ()"
+                  moduleName = "tinkoffNews"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilya/Desktop/swift%20codecademy/tinkoffNews/tinkoffNews/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "308">
+               </Location>
+               <Location
+                  uuid = "0C2DB8E8-739B-4E55-878E-DA230E26E2A5 - e8e57e7c2e54139d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in tinkoffNews.NetworkManager.fetchData(from: Swift.String, with: (tinkoffNews.News) -&gt; ()) -&gt; ()"
+                  moduleName = "tinkoffNews"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilya/Desktop/swift%20codecademy/tinkoffNews/tinkoffNews/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "140">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
