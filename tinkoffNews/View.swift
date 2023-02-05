@@ -44,7 +44,8 @@ import UIKit
 class NewsTableViewCell: UITableViewCell {
     @IBOutlet var imageNewsView: ImageView!
     {
-        didSet {
+        didSet
+        {
             imageNewsView.contentMode = .scaleAspectFill
             imageNewsView.clipsToBounds = true
             imageNewsView.layer.cornerRadius = 40

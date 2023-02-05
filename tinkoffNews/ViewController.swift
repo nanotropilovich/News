@@ -86,7 +86,14 @@ private func refresh() {
                 if !keyExists {
                     counter[value]=0
                 }
-                StorageManager.shared.upload(article: value, count: counter[value]!, forPageKey: value.url!)
+               
+                if StorageManager.shared.fetchViewsCounterValue(forKey: value.url!) != nil {
+                    StorageManager.shared.upload(article: value, count:  StorageManager.shared.fetchViewsCounterValue(forKey: value.url!)!+1, forPageKey: value.url!)
+                }
+                
+                    StorageManager.shared.upload(article: value, count: counter[value]!, forPageKey: value.url!)
+                
+                
                 counts+=1
             }
            
@@ -111,7 +118,7 @@ class NewsDetailsViewController: UIViewController {
         else {
             label.text = "Noname author"
         }
-        label.font = UIFont.systemFont(ofSize:11)
+        label.font = UIFont.systemFont(ofSize:9)
         label.textColor = .white
         label.numberOfLines = 0
         
@@ -133,7 +140,7 @@ class NewsDetailsViewController: UIViewController {
         else {
             label.text = "Publication date unknown"
         }
-        label.font = UIFont.systemFont(ofSize:11)
+        label.font = UIFont.systemFont(ofSize:9)
         label.textColor = .white
         label.numberOfLines = 0
         
@@ -148,7 +155,7 @@ class NewsDetailsViewController: UIViewController {
         else {
             label.text = "No source"
         }
-        label.font = UIFont.systemFont(ofSize:11)
+        label.font = UIFont.systemFont(ofSize:9)
         label.textColor = .white
         label.numberOfLines = 0
         
@@ -158,7 +165,7 @@ class NewsDetailsViewController: UIViewController {
         let label = UILabel()
         label.text = newsDetails.title
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize:23)
+        label.font = UIFont.systemFont(ofSize:14)
         label.numberOfLines = 0
         
         return label
@@ -224,30 +231,30 @@ class NewsDetailsViewController: UIViewController {
             rank.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             rank.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             rank.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            rank.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 300),
-            //rank.textColor = [ UIColor(red: 10/255, green: 20/255, blue: 15/255, alpha: 1)]
+            rank.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             
         ])
         
         image.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
+            //image.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
+            image.topAnchor.constraint(equalTo: rank.bottomAnchor, constant: 0),
             image.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             image.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            image.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 400)
+            image.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 300)
         ])
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 80),
+            descriptionLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 40),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         author.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            author.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
+            author.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             author.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             author.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
