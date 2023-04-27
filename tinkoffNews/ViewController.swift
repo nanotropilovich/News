@@ -10,10 +10,12 @@ import SafariServices
 var counter: [Article:Int] = [:]
 
 class NewsViewController: UITableViewController {
-private let urlSrting = "https://newsapi.org/v2/everything?q=Apple&from=2023-02-05&sortBy=popularity&apiKey=392ed9fdb96a4f2f916b74f2440eecdf"
+private let urlSrting = "https://newsapi.org/v2/everything?q=tesla&from=2023-03-27&sortBy=publishedAt&apiKey=7e91a8b622584937b8c4585e6b64476c"
 private let cellID = "cell"
 private var news: News?
 private lazy var newsArticle: [Article] = []
+   
+  
 override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .red
@@ -26,7 +28,17 @@ override func viewDidLoad() {
     let tableViewLoadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
     self.tableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: "tableviewloadingcellid")
 }
+   
+    override func viewWillAppear(_ animated: Bool) {
+       
+        super.viewDidAppear(animated)
+        //setData()
+        tableView.reloadData()
+    }
+
+   
 }
+
 extension NewsViewController {
 override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     newsArticle.count
@@ -49,7 +61,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
 }
 }
 extension NewsViewController {
-private func setData() {
+public func setData() {
     NetworkManager.shared.fetchData(from: urlSrting) { [weak self] news in
         DispatchQueue.main.async {
         var counts:Int=0
@@ -74,6 +86,13 @@ private func refresh() {
     refreshControl?.addTarget(self, action: #selector(update), for: .valueChanged)
     tableView.addSubview(refreshControl ?? UIRefreshControl())
 }
+    @objc private func update1() {
+        NetworkManager.shared.fetchData(from: urlSrting) { [weak self] news in
+            self?.news = news
+          
+        }
+        
+    }
 @objc private func update() {
     NetworkManager.shared.fetchData(from: urlSrting) { [weak self] news in
         self?.news = news
@@ -109,7 +128,7 @@ private func refresh() {
 }
 class NewsDetailsViewController: UIViewController {
     var updateCounter = 0
-    
+   
     private lazy var author: UILabel = {
         let label = UILabel()
         if let text=newsDetails.author {
@@ -188,25 +207,38 @@ class NewsDetailsViewController: UIViewController {
         
         fullNewsButton.layer.cornerRadius = 10
         fullNewsButton.addTarget(self, action: #selector(goToFullNews), for: .touchUpInside)
-        
+       
         return fullNewsButton
     }()
    
     var newsDetails: Article!
-
+    override func viewWillDisappear(_ animated: Bool) {
+       // super.viewDidLoad()
+        super.viewWillDisappear(animated)
+        //StorageManager.shared.upload(counter: counter, forPageKey: newsDetails)
+        StorageManager.shared.upload(article: newsDetails, count: counter[newsDetails]!, forPageKey: newsDetails.url!)
+       
+    }
     override func viewDidLoad() {
-        super.viewDidLoad()
-        counter[newsDetails]!+=1
+      
+        counter[newsDetails]! += 1
+       
         view.backgroundColor = .black
         navigationController?.navigationBar.tintColor = .white
         setupSubviews()
         setConstrains()
+        
+       
+        super.viewDidLoad()
     }
     
     // MARK: - Actions
     @objc private func goToFullNews() {
+       
         let fullNews = SFSafariViewController(url: URL(string: newsDetails.url ?? "")!)
+        
         present(fullNews, animated: true)
+        
     }
     
     // MARK: - Private methods

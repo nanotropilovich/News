@@ -9,7 +9,7 @@ class StorageManager {
     static let shared = StorageManager()
     private let userDefaults = UserDefaults.standard
     private init() {}
-    func upload(counter: [Article:Int], forPageKey key: String) {
+    func upload(counter: [Article:Int], forPageKey key: Article) {
         for (key, value) in counter {
         userDefaults.set(value, forKey: key.url!)
         }
